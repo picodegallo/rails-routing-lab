@@ -1,5 +1,26 @@
 RailsRouting::Application.routes.draw do
 
+  resources :photos
+ 
+  resources :ships do
+    resources :pirates
+  end
+ 
+  resources :parent_companies do
+    resources :subsidiaries do
+      resources :employees
+    end
+  end
+
+  get '/about' => 'pages#show'
+ 
+  get ':name' => 'pirates#show'
+ 
+  get 'fleets/:id' => 'ships#filtered'
+ 
+  get '/parent_companies/:id/employees' => 'parent_companies#show_employees'
+
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
